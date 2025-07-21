@@ -11,6 +11,13 @@ qt_add_executable(WebBrowser
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    browsertab.h browsertab.cpp browsertab.ui
+    tabwidget.h tabwidget.cpp
+)
+
+target_include_directories(WebBrowser
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(WebBrowser
