@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "browsertab.h"
+#include "tabwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,6 +18,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    void loadPage(BrowserTab* tab, const QString& url);
 
 private:
     Ui::MainWindow *ui;

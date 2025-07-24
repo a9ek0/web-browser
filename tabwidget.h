@@ -4,6 +4,7 @@
 #include <QTabWidget>
 #include <QPushButton>
 #include "browsertab.h"
+#include "controlpanel.h"
 
 class TabWidget : public QTabWidget
 {
@@ -11,6 +12,11 @@ class TabWidget : public QTabWidget
 public:
 
     explicit TabWidget(QWidget *parent = nullptr);
+
+    BrowserTab* addNewTab();
+
+signals:
+    void urlRequested(BrowserTab *tab, const QString &url);
 
 };
 

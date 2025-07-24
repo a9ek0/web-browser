@@ -15,13 +15,30 @@ TabWidget::TabWidget(QWidget *parent)
     btn->setFixedSize(20, 20);
 
     connect(btn, &QPushButton::clicked, this, [=](){
-        auto newTab = new BrowserTab(this);
-        int i = addTab(newTab, "New Tab");
-        setCurrentIndex(i);
+        addNewTab();
     });
 
     setCornerWidget(btn);
 
-    auto firstTab = new BrowserTab(this);
-    addTab(firstTab, "New Tab");
+    addNewTab();
+}
+
+BrowserTab *TabWidget::addNewTab()
+{
+    auto newTab = new BrowserTab(this);
+
+    connect(newTab->getControlPanel(), &ControlPanel::urlSubmited, this, [this, newTab](const QString& url) {
+        emit urlRequested(newTab, url);
+    });
+
+    connect(newTab, &BrowserTab::titleChanged, this, [=](BrowserTab* sender, const QString& title) {
+        int index = indexOf(sender);
+        if (index != -1) {
+            setTabText(index, title);
+        }
+    });
+
+    int i = addTab(newTab, "NewTab");
+    setCurrentIndex(i);
+    return newTab;
 }
