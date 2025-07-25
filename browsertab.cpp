@@ -53,7 +53,8 @@ BrowserTab::BrowserTab(QWidget *parent)
     connect(webView, &QWebEngineView::loadFinished, [](bool ok) {
         if (!ok) qWarning() << "Page load failed";
     });
-    webView->load(QUrl("https://www.google.com"));
+
+    webView->setUrl(QUrl("qrc:/html/resources/html/newtab.html"));
 
 }
 

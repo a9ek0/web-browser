@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <RCC>
-    <qresource prefix="/">
-        <file>icons/default.png</file>
-        <file>icons/loading.png</file>
+    <qresource prefix="/icons">
+        <file>resources/icons/default.png</file>
+        <file>resources/icons/loading.png</file>
+    </qresource>
+    <qresource prefix="/html">
+        <file>resources/html/newtab.html</file>
     </qresource>
 </RCC>

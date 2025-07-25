@@ -43,8 +43,7 @@ BrowserTab *TabWidget::addNewTab()
     connect(newTab, &BrowserTab::loadStarted, this, [=]() {
         int index = indexOf(newTab);
         if (index >= 0) {
-            QIcon loadingIcon(":/icons/loading.png");
-            qDebug() << "Loading icon null:" << loadingIcon.isNull();
+            QIcon loadingIcon(":/icons/resources/icons/loading.png");
             setTabIcon(index, loadingIcon);
         }
     });
@@ -52,8 +51,7 @@ BrowserTab *TabWidget::addNewTab()
     connect(newTab, &BrowserTab::loadFinished, this, [=]() {
         int index = indexOf(newTab);
         if (index >= 0) {
-            QIcon defaultIcon(":/icons/default.png");
-            qDebug() << "Default icon null:" << defaultIcon.isNull();
+            QIcon defaultIcon(":/icons/resources/icons/default.png");
             setTabIcon(index, defaultIcon);
         }
     });
@@ -61,7 +59,7 @@ BrowserTab *TabWidget::addNewTab()
     connect(newTab, &BrowserTab::faviconChanged, this, [=](const QIcon &icon){
         int index = indexOf(newTab);
         if (index >= 0) {
-            setTabIcon(index, icon.isNull() ? QIcon(":/icons/default.png") : icon);
+            setTabIcon(index, icon.isNull() ? QIcon(":/icons/resources/icons/default.png") : icon);
         }
     });
 
