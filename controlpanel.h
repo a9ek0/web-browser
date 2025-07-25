@@ -23,6 +23,7 @@ signals:
 
 public slots:
     void setUrl(const QUrl &url);
+    void setNavigationEnabled(bool canGoBack, bool canGoForward);
 
 private:
     Ui::ControlPanel *ui;

@@ -16,6 +16,11 @@ qt_add_executable(WebBrowser
     browsertab.h browsertab.cpp browsertab.ui
     tabwidget.h tabwidget.cpp
     controlpanel.h controlpanel.cpp controlpanel.ui
+    resources.qrc
+)
+
+set_target_properties(WebBrowser PROPERTIES
+    AUTORCC ON
 )
 
 target_include_directories(WebBrowser

@@ -33,9 +33,21 @@ BrowserTab::BrowserTab(QWidget *parent)
     connect(controlPanel, &ControlPanel::backRequested, webView, &QWebEngineView::back);
     connect(controlPanel, &ControlPanel::forwardRequested, webView, &QWebEngineView::forward);
     connect(controlPanel, &ControlPanel::reloadRequested, webView, &QWebEngineView::reload);
-    connect(webView, &QWebEngineView::urlChanged, controlPanel, &ControlPanel::setUrl);
+    connect(webView, &QWebEngineView::urlChanged, this, [=](const QUrl& url){
+        emit urlChanged(url);
+        emit navigationStateChanged(webView->history()->canGoBack(), webView->history()->canGoForward());
+    });
     connect(webView, &QWebEngineView::titleChanged, this, [=](const QString& title){
         emit titleChanged(this, title);
+    });
+    connect(webView, &QWebEngineView::loadStarted, this, [=]() {
+        emit loadStarted();
+    });
+    connect(webView, &QWebEngineView::loadFinished, this, [=](bool ok) {
+        emit loadFinished();
+    });
+    connect(webView, &QWebEngineView::iconChanged, this, [=](const QIcon &icon){
+        emit faviconChanged(icon);
     });
 
     connect(webView, &QWebEngineView::loadFinished, [](bool ok) {

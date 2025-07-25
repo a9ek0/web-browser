@@ -7,6 +7,9 @@ ControlPanel::ControlPanel(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->backButton->setEnabled(false);
+    ui->forwardButton->setEnabled(false);
+
     connect(ui->addressBar, &QLineEdit::returnPressed, this, [=]{
         emit urlSubmited(ui->addressBar->text());
     });
@@ -25,4 +28,10 @@ ControlPanel::~ControlPanel()
 void ControlPanel::setUrl(const QUrl &url)
 {
     ui->addressBar->setText(url.toString());
+}
+
+void ControlPanel::setNavigationEnabled(bool canGoBack, bool canGoForward)
+{
+    ui->backButton->setEnabled(canGoBack);
+    ui->forwardButton->setEnabled(canGoForward);
 }

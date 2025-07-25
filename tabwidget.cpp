@@ -22,11 +22,13 @@ TabWidget::TabWidget(QWidget *parent)
 
     addNewTab();
 }
-
+#include "QStyle"
 BrowserTab *TabWidget::addNewTab()
 {
     auto newTab = new BrowserTab(this);
 
+    connect(newTab, &BrowserTab::urlChanged, newTab->getControlPanel(), &ControlPanel::setUrl);
+    connect(newTab, &BrowserTab::navigationStateChanged, newTab->getControlPanel(), &ControlPanel::setNavigationEnabled);
     connect(newTab->getControlPanel(), &ControlPanel::urlSubmited, this, [this, newTab](const QString& url) {
         emit urlRequested(newTab, url);
     });
@@ -35,6 +37,31 @@ BrowserTab *TabWidget::addNewTab()
         int index = indexOf(sender);
         if (index != -1) {
             setTabText(index, title);
+        }
+    });
+
+    connect(newTab, &BrowserTab::loadStarted, this, [=]() {
+        int index = indexOf(newTab);
+        if (index >= 0) {
+            QIcon loadingIcon(":/icons/loading.png");
+            qDebug() << "Loading icon null:" << loadingIcon.isNull();
+            setTabIcon(index, loadingIcon);
+        }
+    });
+
+    connect(newTab, &BrowserTab::loadFinished, this, [=]() {
+        int index = indexOf(newTab);
+        if (index >= 0) {
+            QIcon defaultIcon(":/icons/default.png");
+            qDebug() << "Default icon null:" << defaultIcon.isNull();
+            setTabIcon(index, defaultIcon);
+        }
+    });
+
+    connect(newTab, &BrowserTab::faviconChanged, this, [=](const QIcon &icon){
+        int index = indexOf(newTab);
+        if (index >= 0) {
+            setTabIcon(index, icon.isNull() ? QIcon(":/icons/default.png") : icon);
         }
     });
 

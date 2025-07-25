@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QWebEngineView>
+#include <QWebEngineHistory>
 #include "controlpanel.h"
 
 namespace Ui {
@@ -27,6 +28,10 @@ signals:
     void urlEntered(const QString& url);
     void urlChanged(const QUrl &url);
     void titleChanged(BrowserTab*, const QString&);
+    void navigationStateChanged(bool canGoBack, bool canGoForward);
+    void loadStarted();
+    void loadFinished();
+    void faviconChanged(const QIcon &favicon);
 
 private:
     Ui::BrowserTab *ui;
