@@ -3,8 +3,10 @@
 
 #include <QTabWidget>
 #include <QPushButton>
+#include <QDateTime>
 #include "browsertab.h"
 #include "controlpanel.h"
+#include "historymanager.h"
 
 class TabWidget : public QTabWidget
 {

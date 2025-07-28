@@ -48,7 +48,7 @@ BrowserTab::BrowserTab(QWidget *parent)
         emit loadStarted();
     });
     connect(webView, &QWebEngineView::loadFinished, this, [=](bool ok) {
-        emit loadFinished();
+        emit loadFinished(webView->url().toString(), webView->title());
     });
     connect(webView, &QWebEngineView::iconChanged, this, [=](const QIcon &icon){
         emit faviconChanged(icon);

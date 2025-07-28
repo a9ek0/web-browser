@@ -9,11 +9,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    HistoryManager::instance().load();
+
     connect(ui->browserTabs, &TabWidget::urlRequested, this, &MainWindow::loadPage);
 }
 
 MainWindow::~MainWindow()
 {
+    HistoryManager::instance().save();
     delete ui;
 }
 

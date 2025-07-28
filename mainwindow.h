@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "browsertab.h"
 #include "tabwidget.h"
+#include "historymanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

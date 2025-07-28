@@ -31,7 +31,7 @@ signals:
     void titleChanged(BrowserTab*, const QString&);
     void navigationStateChanged(bool canGoBack, bool canGoForward);
     void loadStarted();
-    void loadFinished();
+    void loadFinished(const QString &url, const QString &title);
     void faviconChanged(const QIcon &favicon);
 
 private:

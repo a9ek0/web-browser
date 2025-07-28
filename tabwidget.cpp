@@ -48,12 +48,14 @@ BrowserTab *TabWidget::addNewTab()
         }
     });
 
-    connect(newTab, &BrowserTab::loadFinished, this, [=]() {
+    connect(newTab, &BrowserTab::loadFinished, this, [=](const QString &url, const QString &title) {
         int index = indexOf(newTab);
         if (index >= 0) {
             QIcon defaultIcon(":/icons/resources/icons/default.png");
             setTabIcon(index, defaultIcon);
         }
+
+        HistoryManager::instance().addEntry(url, title, QDateTime::currentDateTime());
     });
 
     connect(newTab, &BrowserTab::faviconChanged, this, [=](const QIcon &icon){
