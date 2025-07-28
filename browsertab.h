@@ -5,6 +5,7 @@
 #include <QWebEngineView>
 #include <QWebEngineHistory>
 #include "controlpanel.h"
+#include "customwebenginepage.h"
 
 namespace Ui {
 class BrowserTab;

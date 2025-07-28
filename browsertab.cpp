@@ -1,5 +1,6 @@
 #include "browsertab.h"
 #include "ui_browsertab.h"
+#include "tabwidget.h"
 
 BrowserTab::BrowserTab(QWidget *parent)
     : QWidget(parent)
@@ -7,7 +8,10 @@ BrowserTab::BrowserTab(QWidget *parent)
 {
     ui->setupUi(this);
 
+    auto webPage = new CustomWebEnginePage(qobject_cast<TabWidget*>(parentWidget()), this);
     webView = new QWebEngineView(this);
+
+    webView->setPage(webPage);
     webView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     if (auto webViewLayout = findChild<QVBoxLayout*>("webViewLayout")) {

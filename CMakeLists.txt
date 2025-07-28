@@ -4,6 +4,7 @@ project(WebBrowser LANGUAGES CXX)
 set(CMAKE_PREFIX_PATH "F:/Qt/6.9.1/msvc2022_64" )
 
 find_package(Qt6 6.9.1 REQUIRED COMPONENTS Core Widgets WebEngineWidgets)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 
 qt_standard_project_setup()
 
@@ -17,6 +18,8 @@ qt_add_executable(WebBrowser
     tabwidget.h tabwidget.cpp
     controlpanel.h controlpanel.cpp controlpanel.ui
     resources.qrc
+    customwebenginepage.h customwebenginepage.cpp
+    historymanager.h historymanager.cpp
 )
 
 set_target_properties(WebBrowser PROPERTIES
@@ -34,6 +37,7 @@ target_link_libraries(WebBrowser
         Qt::Widgets
         Qt::WebEngineWidgets
 )
+target_link_libraries(WebBrowser PRIVATE Qt6::Core)
 
 include(GNUInstallDirs)
 
