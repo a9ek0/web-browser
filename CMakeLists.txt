@@ -20,6 +20,8 @@ qt_add_executable(WebBrowser
     resources.qrc
     customwebenginepage.h customwebenginepage.cpp
     historymanager.h historymanager.cpp
+    historywidget.h historywidget.cpp historywidget.ui
+    historyentrywidget.h historyentrywidget.cpp historyentrywidget.ui
 )
 
 set_target_properties(WebBrowser PROPERTIES

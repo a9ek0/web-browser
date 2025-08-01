@@ -6,6 +6,7 @@
 #include <QWebEngineHistory>
 #include "controlpanel.h"
 #include "customwebenginepage.h"
+#include "historywidget.h"
 
 namespace Ui {
 class BrowserTab;
@@ -33,6 +34,7 @@ signals:
     void loadStarted();
     void loadFinished(const QString &url, const QString &title);
     void faviconChanged(const QIcon &favicon);
+    void addSpecTab(QWidget *widget, const QString &title);
 
 private:
     Ui::BrowserTab *ui;

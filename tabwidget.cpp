@@ -22,7 +22,7 @@ TabWidget::TabWidget(QWidget *parent)
 
     addNewTab();
 }
-#include "QStyle"
+
 BrowserTab *TabWidget::addNewTab()
 {
     auto newTab = new BrowserTab(this);
@@ -63,6 +63,11 @@ BrowserTab *TabWidget::addNewTab()
         if (index >= 0) {
             setTabIcon(index, icon.isNull() ? QIcon(":/icons/resources/icons/default.png") : icon);
         }
+    });
+
+    connect(newTab, &BrowserTab::addSpecTab, this, [=](QWidget *widget, const QString &title){
+        int i = addTab(widget, title);
+        setCurrentIndex(i);
     });
 
     int i = addTab(newTab, "NewTab");

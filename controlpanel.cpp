@@ -7,6 +7,13 @@ ControlPanel::ControlPanel(QWidget *parent)
 {
     ui->setupUi(this);
 
+// Вынести отдельно
+    auto *menu = new QMenu(ui->menuButton);
+    auto showHistoryAction = new QAction("История", menu);
+    menu->addAction(showHistoryAction);
+    ui->menuButton->setMenu(menu);
+//
+
     ui->backButton->setEnabled(false);
     ui->forwardButton->setEnabled(false);
 
@@ -17,6 +24,7 @@ ControlPanel::ControlPanel(QWidget *parent)
     connect(ui->backButton, &QPushButton::clicked, this, &ControlPanel::backRequested);
     connect(ui->forwardButton, &QPushButton::clicked, this, &ControlPanel::forwardRequested);
     connect(ui->reloadButton, &QPushButton::clicked, this, &ControlPanel::reloadRequested);
+    connect(showHistoryAction, &QAction::triggered, this, &ControlPanel::openHistoryRequested);
 
 }
 

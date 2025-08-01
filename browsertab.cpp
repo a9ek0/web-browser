@@ -37,6 +37,10 @@ BrowserTab::BrowserTab(QWidget *parent)
     connect(controlPanel, &ControlPanel::backRequested, webView, &QWebEngineView::back);
     connect(controlPanel, &ControlPanel::forwardRequested, webView, &QWebEngineView::forward);
     connect(controlPanel, &ControlPanel::reloadRequested, webView, &QWebEngineView::reload);
+    connect(controlPanel, &ControlPanel::openHistoryRequested, this, [=]() {
+        auto* history = new HistoryWidget;
+        emit addSpecTab(history, "History");
+    });
     connect(webView, &QWebEngineView::urlChanged, this, [=](const QUrl& url){
         emit urlChanged(url);
         emit navigationStateChanged(webView->history()->canGoBack(), webView->history()->canGoForward());

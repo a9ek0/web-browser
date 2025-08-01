@@ -2,6 +2,7 @@
 #define CONTROLPANEL_H
 
 #include <QWidget>
+#include <QMenu>
 
 namespace Ui {
 class ControlPanel;
@@ -20,6 +21,7 @@ signals:
     void backRequested();
     void forwardRequested();
     void reloadRequested();
+    void openHistoryRequested();
 
 public slots:
     void setUrl(const QUrl &url);
