@@ -17,10 +17,43 @@ void HistoryManager::addEntry(const QString &url, const QString &title, const QD
     history.append(HistoryEntry{url, title, timeStamp});
 }
 
+void HistoryManager::removeEntry(const QDateTime &timestamp)
+{
+    auto it = std::find_if(history.begin(), history.end(), [&](const HistoryEntry& entry){
+        return entry.timestamp == timestamp;
+    });
+
+    if(it != history.end())
+        history.erase(it);
+}
+
 const QList<HistoryEntry> &HistoryManager::getEntries() const
 {
     return history;
 }
+
+QString HistoryManager::simplifyUrl(const QString& rawUrl)
+{
+    const QUrl url(rawUrl);
+
+// Удалить созранение новой вклаки в историю
+    if (url.scheme() == "qrc") {
+        if (url.path().contains("newtab.html"))
+            return "New Tab Page";
+        else
+            return "Internal Page";
+    }
+
+    if (url.scheme() == "file")
+        return QFileInfo(url.toLocalFile()).fileName();
+
+    QString host = url.host();
+    if (host.startsWith("www."))
+        host = host.mid(4);
+
+    return host.isEmpty() ? rawUrl : host;
+}
+
 
 void HistoryManager::save()
 {

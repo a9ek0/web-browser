@@ -9,7 +9,7 @@ ControlPanel::ControlPanel(QWidget *parent)
 
 // Вынести отдельно
     auto *menu = new QMenu(ui->menuButton);
-    auto showHistoryAction = new QAction("История", menu);
+    auto showHistoryAction = new QAction("History", menu);
     menu->addAction(showHistoryAction);
     ui->menuButton->setMenu(menu);
 //

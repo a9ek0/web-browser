@@ -16,8 +16,12 @@ public:
     explicit HistoryEntryWidget(const HistoryEntry &entry, QWidget *parent = nullptr);
     ~HistoryEntryWidget();
 
+signals:
+    void entryDeleted(const HistoryEntryWidget *historyEntryWidget);
+
 private:
     Ui::HistoryEntryWidget *ui;
+    HistoryEntry entry;
 };
 
 #endif // HISTORYENTRYWIDGET_H

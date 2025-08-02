@@ -21,10 +21,13 @@ class HistoryManager
 public:
     static HistoryManager& instance();
     void addEntry(const QString &url, const QString &title, const QDateTime &timeStamp);
+    void removeEntry(const QDateTime &timestamp);
     const QList<HistoryEntry>& getEntries() const;
     void save();
     void load();
     void clear();
+
+    static QString simplifyUrl(const QString& rawUrl);
 
 private:
     HistoryManager();
